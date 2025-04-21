@@ -1,0 +1,33 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter title" />
+    <div *ngIf="hasError('title', 'required')" class="text-danger">
+      Title is required
+    </div>
+    <div *ngIf="hasError('title', 'minlength')" class="text-danger">
+      Title must be at least 3 characters long
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+  </div>
+
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" formControlName="completed" />
+        Completed
+      </label>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">
+    {{ editMode ? 'Update' : 'Add' }} Todo
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="cancelEdit()" *ngIf="editMode">
+    Cancel
+  </button>
+</form>

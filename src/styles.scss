@@ -1,0 +1,31 @@
+/* Basic global styles and Bootstrap import */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+.btn {
+  border-radius: 4px;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}

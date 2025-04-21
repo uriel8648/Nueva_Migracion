@@ -1,0 +1,61 @@
+// header.component.scss
+
+// Styles migrated from header.jsp inline styles
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-actions {
+  white-space: nowrap;
+}
+
+// Navbar specific styles
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+}
+
+.navbar-brand {
+  color: #fff;
+  &:hover {
+    color: #9d9d9d;
+  }
+}
+
+.navbar-nav > li > a {
+  color: #9d9d9d;
+  &:hover, &:focus {
+    color: #fff;
+    background-color: transparent;
+  }
+}
+
+.navbar-toggle {
+  border-color: #333;
+  .icon-bar {
+    background-color: #fff;
+  }
+}
+
+.jumbotron {
+  background-color: #eee;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+}
