@@ -53,15 +53,34 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Title</th>
-                  <th>Status</th>
+                  <th>
+                    Title
+                    <button type="button" class="btn btn-xs btn-default sort-status-btn" (click)="toggleSortByTitle()" title="Sort by Title">
+                      <i class="fa fa-sort"></i>
+                    </button>
+                  </th>
+
+                  <th>
+                    Description
+
+                    <button type="button" class="btn btn-xs btn-default sort-status-btn" (click)="toggleSortByTitle()" title="Sort by Title">
+                      <i class="fa fa-sort"></i>
+                    </button>
+                  </th>
+                  <th>
+                    Status
+                    <button type="button" class="btn btn-xs btn-default sort-status-btn" (click)="toggleSortByStatus()" title="Sort by Status">
+                      <i class="fa fa-sort"></i>
+                    </button>
+                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let todo of todos; let i = index">
+                <tr *ngFor="let todo of sortedTodos; let i = index">
                   <td>{{todo.id}}</td>
                   <td [class.completed]="todo.completed">{{todo.title}}</td>
+                  <td>{{todo.description}}</td>
                   <td>
                     <span class="label" [ngClass]="{'label-success': todo.completed, 'label-warning': !todo.completed}">
                       {{todo.completed ? 'Completed' : 'Pending'}}

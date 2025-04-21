@@ -16,6 +16,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   editMode = false;
   editIndex = -1;
   loading = false;
+
+  sortColumn: string | null = null;
+  sortAsc = true;
   
   // Subject for handling unsubscriptions
   private destroy$ = new Subject<void>();
@@ -31,6 +34,51 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadTodos();
+  }
+
+  toggleSortByStatus(): void {
+    if (this.sortColumn === 'status') {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortColumn = 'status';
+      this.sortAsc = true;
+    }
+  }
+
+  toggleSortByTitle(): void {
+    if (this.sortColumn === 'title') {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortColumn = 'title';
+      this.sortAsc = true;
+    }
+  }
+
+  get sortedTodos(): Todo[] {
+    if (!this.sortColumn) {
+      return this.todos;
+    }
+
+    const sorted = [...this.todos];
+    if (this.sortColumn === 'status') {
+      sorted.sort((a, b) => {
+        if (a.completed === b.completed) return 0;
+        if (this.sortAsc) {
+          return a.completed ? 1 : -1; // Pending first, Completed last
+        } else {
+          return a.completed ? -1 : 1; // Completed first, Pending last
+        }
+      });
+    } else if (this.sortColumn === 'title') {
+      sorted.sort((a, b) => {
+        const titleA = a.title.toLowerCase();
+        const titleB = b.title.toLowerCase();
+        if (titleA < titleB) return this.sortAsc ? -1 : 1;
+        if (titleA > titleB) return this.sortAsc ? 1 : -1;
+        return 0;
+      });
+    }
+    return sorted;
   }
 
   ngOnDestroy(): void {
