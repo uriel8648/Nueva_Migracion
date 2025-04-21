@@ -69,16 +69,16 @@
                   </td>
                   <td class="task-actions">
                     <button type="button" class="btn btn-xs btn-primary" (click)="editTodo(todo, i)">
-                      <span class="glyphicon glyphicon-pencil"></span>
+                      <i class="fa fa-edit"></i> Edit
                     </button>
                     <button type="button" class="btn btn-xs" 
                             [ngClass]="{'btn-warning': todo.completed, 'btn-success': !todo.completed}"
                             (click)="toggleStatus(todo)">
-                      <span class="glyphicon" 
-                            [ngClass]="{'glyphicon-repeat': todo.completed, 'glyphicon-ok': !todo.completed}"></span>
+                            <i class="fa" [ngClass]="{'fa-check': !todo.completed, 'fa-undo': todo.completed}"></i>
+                            {{ todo.completed ? 'Mark Incomplete' : 'Mark Complete' }}
                     </button>
                     <button type="button" class="btn btn-xs btn-danger" (click)="deleteTodo(todo.id, i)">
-                      <i class="fa fa-trash"></i> 
+                      <i class="fa fa-trash"></i> Delete
                     </button>
                   </td>
                 </tr>

@@ -22,6 +22,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   constructor(private todoService: TodoService, private fb: FormBuilder) {
     this.todoForm = this.fb.group({
+      id: [null],
       title: ['', Validators.required],
       description: [''],
       completed: [false]
