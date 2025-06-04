@@ -1,6 +1,6 @@
 name: Deploy to server
 on:  push
-
+###Prueba de comentario
 jobs:
   first_jobs:
     runs-on: ubuntu-latest
@@ -10,5 +10,10 @@ jobs:
 
     steps:
       - name: HOAL mundo
-        run: echo "Hola Mundo $NAME"
+        id: step_1
+        run: echo "Hola Mundo $NAME" >>$GITHUB_OUTPUT
+
+      - name: Obtener MEnsaje 
+        run: echo "${{steps.step_1.outputs}}"
+
 
