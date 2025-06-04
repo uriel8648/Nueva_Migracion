@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: HOAL mundo
         id: step_1
-        run: echo "Hola Mundo $NAME" >>$GITHUB_OUTPUT
+        run: echo "message=Hola Mundo $NAME" >> $GITHUB_OUTPUT
 
       - name: Obtener MEnsaje 
-        run: echo "${{steps.step_1.outputs}}"
+        run: echo "${{ steps.step_1.outputs.message }}"
 
 
