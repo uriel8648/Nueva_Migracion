@@ -1,20 +1,15 @@
 name: Deploy to server
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on:  
- push:
-  branches: [main]
+on:  push
 ###Prueba de comentario
-jobs: 
-   first_jobs:
+jobs:
+  first_jobs:
     runs-on: ubuntu-latest
 
     env:
       NAME: CodigoFacilito
 
     steps:
-      - name: Checkout repo
-
-      
       - name: Print variable
         id: step_1
         run: echo "message=Hola Mundo $NAME" >> $GITHUB_OUTPUT
