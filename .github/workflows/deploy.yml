@@ -1,4 +1,4 @@
-name: Publish Package to npmjs
+name: ACTIOMS
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:  push
 ####Prueba de comentario
