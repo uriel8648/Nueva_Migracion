@@ -1,0 +1,96 @@
+##Uso de MAtriz
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16]
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+###Almacenar dependencias en caché
+jobs:
+  example-job:
+    steps:
+      - name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-          
+
+###Usar bases de datos y contenedores de servicio
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    container: node:20-bookworm-slim
+    services:
+      postgres:
+        image: postgres
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Connect to PostgreSQL
+        run: node client.js
+        env:
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432            
+###########    Utilizar condiciones para controlar la ejecución de jobs
+name: example-workflow
+on: [push]
+jobs:
+  production-deploy:
+    if: github.repository == 'octo-org/octo-repo-prod'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+      - run: npm install -g bats      
+
+
+      ###branch protection rule
+ on:
+        branch_protection_rule:
+        types: [created, deleted]
+
+      ##check run
+    ##  Por ejemplo, puede ejecutar un flujo de trabajo cuando una ejecución de comprobación ha sido rerequested o completed.
+
+on:
+  check_run:
+    types: [rerequested, completed]
+
+
+    ### JOBS runs-on es lamaquina virtual
+    on:
+  workflow_dispatch:
+    inputs:
+      chosen-os:
+        required: true
+        type: choice
+        options:
+        - Ubuntu
+        - macOS
+
+jobs:
+  test:
+    runs-on: [self-hosted, "${{ inputs.chosen-os }}"]
+    steps:
+    - run: echo Hello world!
+
+
+    ##Commit and push changes
+permissions:
+ contents: write
+
+ steps: stefanzwife/git-auto-commit@v4
+  
