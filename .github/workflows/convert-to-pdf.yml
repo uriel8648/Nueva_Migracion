@@ -11,16 +11,16 @@ jobs:
     - name: Tener copia local del repo
       uses: actions/checkout@v4.2.2
 
-    - name: Instalar .NET en el runner
-      uses: actions/setup-dotnet@v4
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
       with:
-        dotnet-version: '9.0.x'
+        node-version: '16'
 
     - name: Instalar dependencias
-      run: dotnet restore
+      run: npm install
 
-    - name: Compilar
-      run: dotnet build --no-restore
+    - name: Compilar Angular
+      run: npm run build
 
   crear-pdf:
     runs-on: ubuntu-latest
